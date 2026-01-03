@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import PasswordController from '@/actions/App/Http/Controllers/Settings/PasswordController';
+import UserPasswordController from '@/actions/App/Http/Controllers/UserPasswordController';
 import InputError from '@/components/InputError.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import SettingsLayout from '@/layouts/settings/Layout.vue';
-import { edit } from '@/routes/user-password';
+import { edit } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
 
 import HeadingSmall from '@/components/HeadingSmall.vue';
@@ -32,7 +32,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
                 />
 
                 <Form
-                    v-bind="PasswordController.update.form()"
+                    v-bind="UserPasswordController.update.form()"
                     :options="{
                         preserveScroll: true,
                     }"
