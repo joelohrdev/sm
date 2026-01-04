@@ -36,4 +36,18 @@ export interface User {
     updated_at: string;
 }
 
+export interface Organization {
+    id: number;
+    uuid: string;
+    user_id: number;
+    name: string;
+    slug: string;
+    owner_id: number;
+    logo_path: string | null;
+    primary_color: string | null;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string | null;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;

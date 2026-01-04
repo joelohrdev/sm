@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserEmailResetNotification;
@@ -14,7 +16,9 @@ use Inertia\Inertia;
 Route::get('/', fn () => Inertia::render('Welcome'))->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function (): void {
-    Route::get('dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('organization/create', [OrganizationController::class, 'store'])->name('organization.store');
 });
 
 Route::middleware('auth')->group(function (): void {

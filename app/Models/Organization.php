@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Observers\OrganizationObserver;
 use Carbon\CarbonInterface;
 use Database\Factories\OrganizationFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property-read int $id
- * @property-read string $uuid
+ * @property string $uuid
  * @property-read int $user_id
  * @property-read string $name
  * @property-read string $slug
@@ -25,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read CarbonInterface $updated_at
  * @property-read CarbonInterface|null $deleted_at
  */
+#[ObservedBy(OrganizationObserver::class)]
 final class Organization extends Model
 {
     /** @use HasFactory<OrganizationFactory> */
