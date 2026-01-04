@@ -23,11 +23,12 @@ test('to array', function (): void {
 
 test('user has many organizations', function (): void {
     $user = User::factory()->create();
-    Organization::factory()->count(3)->for($user)->create();
+    $organizations = Organization::factory()->count(3)->create();
+
+    $user->organizations()->attach($organizations);
 
     expect($user->organizations)
-        ->toHaveCount(3)
-        ->each(fn ($organization) => $organization->user_id->toBe($user->id));
+        ->toHaveCount(3);
 });
 
 test('user has one guardian', function (): void {

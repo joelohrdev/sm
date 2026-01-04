@@ -19,7 +19,6 @@ test('to array', function (): void {
         ->toBe([
             'id',
             'uuid',
-            'user_id',
             'name',
             'slug',
             'owner_id',
@@ -31,11 +30,11 @@ test('to array', function (): void {
         ]);
 });
 
-test('belongs to a user', function (): void {
+test('belongs to an owner', function (): void {
     $user = User::factory()->create();
-    $organization = Organization::factory()->for($user)->create();
+    $organization = Organization::factory()->for($user, 'owner')->create();
 
-    expect($organization->user->is($user))->toBeTrue();
+    expect($organization->owner->is($user))->toBeTrue();
 });
 
 test('has many seasons', function (): void {

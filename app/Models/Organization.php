@@ -11,13 +11,13 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property-read int $id
  * @property string $uuid
- * @property-read int $user_id
  * @property-read string $name
  * @property-read string $slug
  * @property-read int $owner_id
@@ -38,7 +38,6 @@ final class Organization extends Model
         return [
             'id' => 'integer',
             'uuid' => 'string',
-            'user_id' => 'integer',
             'name' => 'string',
             'slug' => 'string',
             'owner_id' => 'integer',
@@ -53,9 +52,17 @@ final class Organization extends Model
     /**
      * @return BelongsTo<User, $this>
      */
-    public function user(): BelongsTo
+    public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    /**
+     * @return BelongsToMany<User, $this>
+     */
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->withPivot('role')->withTimestamps();
     }
 
     /**

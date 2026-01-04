@@ -22,7 +22,6 @@ final class OrganizationFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'user_id' => User::factory(),
             'name' => $this->faker->company(),
             'slug' => $this->faker->slug(),
             'owner_id' => User::factory(),

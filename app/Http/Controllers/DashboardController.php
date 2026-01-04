@@ -12,7 +12,7 @@ final class DashboardController
     public function index(): Response
     {
         return Inertia::render('Dashboard', [
-            'organization' => auth()->user()->organizations()->first(),
+            'organization' => auth()->user()->organization(),
         ]);
     }
 }

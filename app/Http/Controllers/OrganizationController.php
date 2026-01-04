@@ -18,12 +18,17 @@ final class OrganizationController
             $logoPath = $request->file('logo_path')->store('logos', 'public');
         }
 
-        $user->organizations()->create([
+        $organization = \App\Models\Organization::create([
+            'uuid' => Str::uuid(),
             'name' => $request->string('name'),
             'slug' => Str::slug($request->string('name')),
             'owner_id' => $user->getKey(),
             'logo_path' => $logoPath ?? null,
             'primary_color' => $request->string('primary_color'),
+        ]);
+
+        $user->organizations()->attach($organization->id, [
+            'role' => \App\Enums\Role::GUARDIAN,
         ]);
 
         return to_route('dashboard')
