@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToOrganization;
 use Carbon\CarbonInterface;
 use Database\Factories\DivisionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 final class Division extends Model
 {
     /** @use HasFactory<DivisionFactory> */
-    use HasFactory;
+    use BelongsToOrganization, HasFactory;
 
     public function casts(): array
     {

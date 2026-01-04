@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\BelongsToOrganization;
 use Carbon\CarbonInterface;
 use Database\Factories\GuardianFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,7 +27,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 final class Guardian extends Model
 {
     /** @use HasFactory<GuardianFactory> */
-    use HasFactory;
+    use BelongsToOrganization, HasFactory;
 
     /**
      * @return array<string, string>

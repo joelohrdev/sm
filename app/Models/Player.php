@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\Bats;
 use App\Enums\Throws;
+use App\Models\Concerns\BelongsToOrganization;
 use Carbon\CarbonInterface;
 use Database\Factories\PlayerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,7 +32,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 final class Player extends Model
 {
     /** @use HasFactory<PlayerFactory> */
-    use HasFactory;
+    use BelongsToOrganization, HasFactory;
 
     /**
      * @return array<string, string>
