@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Http\Requests\CreateOrganizationRequest;
+use App\Models\Organization;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 
@@ -18,7 +20,7 @@ final class OrganizationController
             $logoPath = $request->file('logo_path')->store('logos', 'public');
         }
 
-        $organization = \App\Models\Organization::create([
+        $organization = Organization::create([
             'uuid' => Str::uuid(),
             'name' => $request->string('name'),
             'slug' => Str::slug($request->string('name')),
@@ -28,7 +30,7 @@ final class OrganizationController
         ]);
 
         $user->organizations()->attach($organization->id, [
-            'role' => \App\Enums\Role::GUARDIAN,
+            'role' => Role::GUARDIAN,
         ]);
 
         return to_route('dashboard')
