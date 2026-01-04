@@ -71,7 +71,7 @@ const handleSuccess = () => {
                 <Form
                     v-bind="OrganizationController.store.form()"
                     class="space-y-6"
-                    v-slot="{ errors, processing, recentlySuccessful }"
+                    v-slot="{ errors, processing }"
                     @success="handleSuccess"
                 >
                     <div class="grid gap-2">
