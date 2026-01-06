@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserEmailResetNotification;
@@ -19,6 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::post('organization/create', [OrganizationController::class, 'store'])->name('organization.store');
+
+    Route::resource('seasons', SeasonController::class)->names('season');
 });
 
 Route::middleware('auth')->group(function (): void {

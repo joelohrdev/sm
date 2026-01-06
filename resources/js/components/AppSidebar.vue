@@ -13,14 +13,24 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { LayoutGrid } from 'lucide-vue-next';
+import { LayoutGrid, Archive } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+import NavFooter from '@/components/NavFooter.vue';
+import { index as seasonIndex } from '@/actions/App/Http/Controllers/SeasonController'
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+];
+
+const footerNavItems: NavItem[] = [
+    {
+        title: 'Season Manager',
+        href: seasonIndex(),
+        icon: Archive,
     },
 ];
 </script>
@@ -44,6 +54,7 @@ const mainNavItems: NavItem[] = [
         </SidebarContent>
 
         <SidebarFooter>
+            <NavFooter :items="footerNavItems" />
             <NavUser />
         </SidebarFooter>
     </Sidebar>
